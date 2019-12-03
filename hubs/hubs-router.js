@@ -99,11 +99,20 @@ router.get('/:id/messages', (req, res) => {
   })
   .catch(error => {
     console.log(error);
-    res.status(500).json({ errorMessage: 'error getting hubs message'})
+    res.status(500).json({ errorMessage: 'error getting hubs message' })
     
   })
 })
 
 // add an endpoint for adding new message to a hub
+router.post('/:id/messages', (req, res) => {
+  Hubs.addMessage(req.body).then(message => {
+    res.status(200).json(message);
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({ errorMessage: 'error adding message' })
+  })
+})
 
 module.exports = router;
